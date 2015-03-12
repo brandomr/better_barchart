@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<title>Intro to D3.js</title>
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		
+				<!-- Code syntax highlighting -->
+		
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<style>
+
+.bar {
+  fill: #3690c0;
+}
+
+.bar:hover {
+  fill: #fc4e2a;
+}
+
+.axis {
+  font: 12px sans-serif;
+  fill: #fff;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #969696;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+.chart rect {
+  fill: #63b6db;
+}
+
+.chart text {
+  fill: white;
+  font: 12px sans-serif;
+  text-anchor: end;
+}
+
+text {
+ font: 16px sans-serif;
+}
+
+table {
+align: center;
+}
+
+
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #efefef;
+    border-radius: 2px;
+    font: 12px sans-serif;
+    z-index: 10000;
+  }
+
+  /* Creates a small triangle extender for the tooltip */
+  .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 11px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+  }
+
+  /* Style northward tooltips differently */
+  .d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+  }
+
+
+</style>
+</head>
+<body>
+		<div class="reveal">
+			<div class="slides">
+
+
+<section id="sect2">
+
+<h2>Where we're going</h2>
+Our goal is to end up with something that looks like this.
+<div class="barchart"></div>
+</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				]
+			});
+		</script>
+
+		<script src="js/d3.min.js"></script>
+		<script src="d3/d3.tip.min.js"></script>
+
+		<script type="text/javascript" src="js/barchart.js"></script>
+		
+</body>
+</html>

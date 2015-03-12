@@ -1,0 +1,102 @@
+.bar_step2 {
+  fill: #3690c0;
+}
+
+.bar_step2:hover {
+  fill: #fc4e2a;
+}
+
+.bar_step3 {
+  fill: #3690c0;
+}
+
+.bar_step3:hover {
+  fill: #fc4e2a;
+}
+
+
+.bar_step4 {
+  fill: #3690c0;
+}
+
+.bar_step4:hover {
+  fill: #fc4e2a;
+}
+
+
+.axis_step4 {
+  font: 12px sans-serif;
+  fill: #fff;
+}
+
+.axis_step4 path,
+.axis_step4 line {
+  fill: none;
+  stroke: #969696;
+  shape-rendering: crispEdges;
+}
+
+.x.axis_step4 path {
+  display: none;
+}
+
+
+
+
+.bar_step5 {
+  fill: #3690c0;
+}
+
+.bar_step5:hover {
+  fill: #fc4e2a;
+}
+
+
+.axis_step5 {
+  font: 12px sans-serif;
+  fill: #fff;
+}
+
+.axis_step5 path,
+.axis_step5 line {
+  fill: none;
+  stroke: #969696;
+  shape-rendering: crispEdges;
+}
+
+.x.axis_step5 path {
+  display: none;
+}
+
+
+
+
+
+
+
+.bar_step6 {
+  fill: #3690c0;
+}
+
+.bar_step6:hover {
+  fill: #fc4e2a;
+}
+
+
+.axis_step6 {
+  font: 12px sans-serif;
+  fill: #fff;
+}
+
+.axis_step6 path,
+.axis_step6 line {
+  fill: none;
+  stroke: #969696;
+  shape-rendering: crispEdges;
+}
+
+.x.axis_step6 path {
+  display: none;
+}
+
+

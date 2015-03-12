@@ -1,0 +1,1292 @@
+<!doctype html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<title>Intro to D3.js</title>
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/bar_examples.css">
+		
+				<!-- Code syntax highlighting -->
+		
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<style>
+
+.bar {
+  fill: #3690c0;
+}
+
+.bar:hover {
+  fill: #fc4e2a;
+}
+
+
+.axis {
+  font: 12px sans-serif;
+  fill: #fff;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #969696;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.chart rect {
+  fill: #63b6db;
+}
+
+.chart text {
+  fill: white;
+  font: 12px sans-serif;
+  text-anchor: end;
+}
+
+text {
+ font: 16px sans-serif;
+}
+
+table {
+align: center;
+}
+
+
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #efefef;
+    border-radius: 2px;
+    font: 12px sans-serif;
+    z-index: 10000;
+  }
+
+  /* Creates a small triangle extender for the tooltip */
+  .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 11px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+  }
+
+  /* Style northward tooltips differently */
+  .d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+  }
+  
+    .example_bar {
+    display: inline-block;
+    width: 50px;
+    background-color: #3690c0;
+    }
+
+
+</style>
+</head>
+<body>
+
+<div class="reveal">
+	<div class="slides">
+
+
+<!--SLIDE #1 STARTS :: INTRO -->
+<section id="sect1" data-markdown>
+   <script type="text/template">
+   ## Let's make a better bar chart!
+   This walk through covers how to go from zero to interactive bar chart as quickly as possible. 
+   Along the way we'll learn a bit about *HTML5, CSS, and javascript.*
+   </script>
+</section>
+
+
+
+
+
+<!--SLIDE #2 STARTS :: FULL BAR -->
+<section id="sect2">
+  <h2>Where we're going</h2>
+  Our goal is to end up with something that looks like this.
+  <div class="barchart"></div>
+</section>
+
+
+
+
+
+<!--SLIDE 3 STARTS :: DATA -->
+<section id="sect3">
+
+	<!--SLIDE #3.1 STARTS :: DATA -->
+	<section id="sect3.1">
+
+	<h3>What is HTML?</h3>
+	<p>
+	HyperText Markup Language (HTML) is the standard markup language used to create webpages.
+	<br><br>
+	An HTML document is a plain text document with an .html extension that 
+	consists of elements enclosed in <>.
+	<br><br>
+	Here is what a very standard site might look like:
+	<br></p>
+	<pre><code data-trim contenteditable>
+<div>
+	<p>Hello world!</p>
+</div>
+	</code></pre>
+	<span style='text-align:left'>Hello world!</span>
+
+	</section>
+
+
+	<!--SLIDE #3.2 STARTS :: BAR WITH DIVS -->
+   <section id="sect3.2">
+
+   <h2>What's a div?</h2>
+   <p> 
+   One of the most basic building blocks of HTML pages is the <code>div.</code> A <code>div</code> is 
+   essentially a rectangular block. Here's an example of one:
+   </p>
+   <pre><code data-trim contenteditable>
+   <div style="display: inline-block;
+				   width: 50px;
+				   height: 200px;
+				   background-color: #3690c0;"></div>
+   </code></pre>
+
+	   <div style="display: inline-block;
+				   width: 50px;
+				   height: 200px;
+				   background-color: #3690c0;"></div>
+	
+	   </section>
+	
+
+	<!--SLIDE #3.3 STARTS :: BAR WITH DIVS -->
+   <section id="sect3.3">
+
+   <h3>Let's make a basic bar chart</h3>
+   <p>With just a set of <code>div</code> elements, we can actually make a bar chart appear on a page.
+   </p>
+   <pre><code data-trim contenteditable>
+<div class="example_bar" style="height: 20px"></div>
+<div class="example_bar" style="height: 50px"></div>
+<div class="example_bar" style="height: 75px"></div>
+<div class="example_bar" style="height: 100px"></div>
+<div class="example_bar" style="height: 150px"></div>
+   </code></pre>
+		<div class="example_bar" style="height: 20px"></div>
+		<div class="example_bar" style="height: 50px"></div>
+		<div class="example_bar" style="height: 75px"></div>
+		<div class="example_bar" style="height: 100px"></div>
+		<div class="example_bar" style="height: 150px"></div>
+		
+	   </section>
+
+	<!--SLIDE #3.4 STARTS :: BAR WITH DIVS -->
+   <section id="sect3.4">
+
+   <h3>Styling with CSS</h3>
+   <p>Cascading Style Sheets (CSS) enable you to apply styles to elements of the same type or of the same
+   <code>class</code> or <code>ID</code>. 
+   <br>
+   <br>
+   They are intended to enable the separation of document content from
+   document presentation. Here's how I applied styling to all the bars in the bar chart at once.
+   </p>
+   <pre><code data-trim contenteditable>
+<style>
+.example_bar {
+	  display: inline-block;
+	  width: 50px;
+	  background-color: #3690c0;
+	  }
+</style>
+   </code></pre>
+	   </section>	
+	
+	<!--SLIDE #3.5 STARTS :: BAR WITH DIVS -->
+   <section id="sect3.5">
+
+   <h3>HTML5 and the SVG</h3>
+   <p>With the advent of HTML5 came the Scalable Vector Graphic (SVG). The SVG is a canvas
+   for creating graphics like lines/paths, rectangles, and circles. 
+   <br>
+   <br>
+   <strong>D3.js</strong> relies on the SVG to create graphics that can scale to the size of our data. Here's an example.
+   </p>
+   <pre><code data-trim contenteditable>
+<svg width="100" height="100">
+  <circle cx="50" cy="50" r="40" stroke="grey" stroke-width="4" fill="steelblue" />
+</svg>
+   </code></pre>
+<svg width="100" height="100">
+  <circle cx="50" cy="50" r="40" stroke="grey" stroke-width="4" fill="steelblue" />
+</svg>
+	   </section>	
+
+
+	<!--SLIDE #3.6 STARTS :: BAR WITH DIVS -->
+   <section id="sect3.6" data-markdown>
+   <script type="text/template">
+	
+	### One last thing about HTML
+	HTML documents are stored in local memory on a client's computer and
+	are interpreted by the web browser. The interpretation of the HTML is
+	rendered as the 
+	
+	**Document Object Model (DOM)**
+	
+	The DOM need not be static! In fact, the beauty of **D3.js** is that it allows us
+	to easily use data to manipulate the DOM.
+	
+	</script>
+	</section>		
+	
+</section>
+
+
+<!--SLIDE 4 STARTS :: DATA -->
+<section id="sect4">
+
+  <!--SLIDE #4.1 STARTS :: D3.js -->
+  <section id="sect4.1" data-markdown>
+	<script type="text/template">
+	  ### What is D3.js?
+	
+	  [Data-Driven Documents (D3)](http://d3js.org/)	 is a *javascript* library designed for the creation of web-based charting.
+	  A web page is just an HTML document and D3 let's us drive the HTML using data.
+	  <img src="d3_overview.png" alt="D3" style="width: 50%; display:block; margin-left:25%;"/>
+	</script>
+  </section>
+
+  <!--SLIDE #4.2 STARTS :: D3.js -->
+  <section id="sect4.2" data-markdown>
+	<script type="text/template">
+	  ### What is D3.js?
+	  
+	  D3.js was created in 2011 by [Mike Bostock](http://bost.ocks.org/mike/), Vadim Ogievetsky, and Jeffrey Heer while they were part of 
+	  Stanford's Vis Group. D3.js is open source and has become the standard for interactive
+	  visualizations for the web.
+	  
+	  D3 is used by the New York Times (who now employs Mike Bostock) and many others. It has been leveraged
+	  for building many of the other commonly used web charting libraries.  
+	  <img src="nvd3.png" alt="D3" style="width: 225px; height:225px"/> 
+	  <img src="dimple.png" alt="D3" style="width: 225px; height:225px"/>
+	  <img src="d3_chart.png" alt="D3" style="width: 225px; height:225px"/> 
+	  <img src="mpld3.png" alt="D3" style="width: 225px; height:225px"/>
+	
+	</script>
+  </section>
+  
+  
+    <!--SLIDE #4.3 STARTS :: D3.js -->
+  <section id="sect4.3" data-markdown>
+	<script type="text/template">
+	  ### Never start from scratch!
+	  
+	  I never do. And nor should you. Leverage the many examples available at [D3js.org](http://d3js.org)
+	  and elsewhere.
+	  	  
+	<img src="d3_examples.png" alt="D3" style="width: 50%; display:block; margin-left:25%;"/>
+
+	
+	</script>
+  </section>
+
+
+  <!--SLIDE #4.3 STARTS :: D3.js -->
+  <section id="sect4.3">
+	
+	  <h3> D3 is Javascript</h3>
+	  <p>
+	  Javascript is considered the language of the web. It has been around for a while 
+	  (it was first developed at Netscape in the 90's) and is now used on essentially
+	  any web page you might visit. For example, this presentation was made with 
+	  <a href="http://lab.hakim.se/reveal-js/">Reveal.js</a>.
+	  <br><br>
+	  To load some javascript include a reference to the script file in your HTML document:
+	  </p>
+	  <pre><code data-trim contenteditable>
+	  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	  </pre></code>
+	  <p>
+	  Keep in mind that like a HTML, a javascript document is simply a plain 
+	  text document written in javascript with a .js extension.
+	  </p>
+  </section>
+
+
+   <!--SLIDE #4.5 STARTS :: D3.js -->
+  <section id="sect4.5" data-markdown>
+	<script type="text/template">
+	
+	  	  
+	<img src="js_no_idea.jpg" alt="JS" style="width: 62%; display:block; margin-left:17%;"/>
+
+	
+	</script>
+  </section>
+
+</section>
+
+
+<!--SLIDE #5 STARTS :: DATA -->
+<section id="sect5">
+
+<!--SLIDE #5.1 STARTS :: DATA -->
+<section id="sect5.1" data-markdown>
+  <script type="text/template">
+
+  ### Back to the bar chart
+  here is the data the we will use to build the chart
+  
+|country|favorability|description|
+|---|---|---|
+|Bahrain|27|<small>Our favorability with Bahrain is at an all time low</small>|
+|Bangladesh|35|<small>We are doing better and better with Bangladesh</small>|
+|Brunei|48|<small>Could be better with Brunei all things considered</small>|
+|Bermuda|56|<small>Bermuda is such a nice place. A really nice place</small>|
+|Barbados|69|<small>Great island and they less than three us</small>|
+|Bolivia|74|<small>Surprising right? Who would have thought it?</small>|
+|Brandon|87|<small>He is our biggest fan thats for sure</small>|
+
+  </script>
+</section>
+
+<!--SLIDE #5.2 STARTS :: DATA -->
+<section id="sect5.2" data-markdown>
+  <script type="text/template">
+
+  ### Let's call the file *data.csv*
+  
+  A *.csv* file is just a comma separated text file. 
+  Recognize a theme here?
+  We will be using a lot of plain text files. 
+  
+  You have probably opened a *.csv* or two using Excel or another spreadsheet software.
+  
+  Bet you didn't notice the difference.
+
+  </script>
+</section>
+</section>
+
+
+
+<!--SLIDE #6 STARTS :: DATA -->
+<section id="sect6">
+
+<!--SLIDE #5.1 STARTS :: DATA -->
+<section id="sect6.1" data-markdown>
+  <script type="text/template">
+	
+	### Let's get started.
+	First, you'll need to create a blank web page and load D3.
+
+	<pre><code contenteditable>&lt;!DOCTYPE html&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;body&gt;
+        &lt;div&gt;Behold, a bar chart!&lt;/div&gt;
+        &lt;div class=&quot;barchart&quot;&gt;&lt;/div&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;http://d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
+         &lt;script type=&quot;text/javascript&quot; src=&quot;barchart.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+	</code></pre>
+	
+	You can copy and paste that into a blank file using a plain text editor. I like 
+	[Text Wrangler](http://www.barebones.com/products/textwrangler/) since it's free but you could just
+	as easily use something as basic as Notepad or something with more functionality like Sublime Text.
+	
+	Make sure you save your file with a **.html** extension.
+	
+  </script>
+</section>
+
+<!--SLIDE #6.2 STARTS :: DATA -->
+<section id="sect6.2" data-markdown>
+  <script type="text/template">
+	### Let's look at what we just did
+	
+	<pre><code contenteditable>&lt;!DOCTYPE html&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;body&gt;
+        &lt;div&gt;Behold, a bar chart!&lt;/div&gt;
+        &lt;div class=&quot;barchart&quot;&gt;&lt;/div&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;http://d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
+         &lt;script type=&quot;text/javascript&quot; src=&quot;barchart.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+	</code></pre>
+	
+* Created a <code>div</code> which serves as a title *(Behold...)*
+* Created a <code>div</code> with the <code>class</code> *barchart* which will be a container for our chart
+* Sourced *d3.v3.min.js* from the [D3js.org](http://d3js.org). Alternatively, we could save the d3.js file locally and source it from our file directory
+* Sourced *barchart.js*, the file that we are going to create and which will define our chart
+
+  </script>
+</section>
+
+</section>
+
+
+
+
+
+<!--SLIDE #7 STARTS :: DATA -->
+<section id="sect7" data-markdown>
+  <script type="text/template">
+	
+	### Onto the D3
+	Open up another blank plain text file and save it in the same directory as your **.html** file.
+	Call it **barchart.js**
+
+	We'll use this file to write out our **D3** script.
+	
+  </script>
+</section>
+
+
+
+<!--SLIDE #8 STARTS :: DATA -->
+<section id="sect8">
+
+<!--SLIDE #8.1 STARTS :: DATA -->
+<section id="sect8.1" data-markdown>
+  <script type="text/template">
+
+  ### Setting up our canvas
+  
+  First, let's define the margins of our chart.
+<pre><code contenteditable>var margin = {top: 50, right: 20, bottom: 30, left: 60}
+var width = 660 - margin.left - margin.right
+var height = 400 - margin.top - margin.bottom;</code></pre>
+
+Next, let's scale our *x* and *y* axes to fit the canvas:
+<pre><code contenteditable>var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+</code></pre>
+	
+  </script>
+</section>
+
+
+<!--SLIDE #8.2 STARTS :: DATA -->
+<section id="sect8.2" data-markdown>
+  <script type="text/template">
+
+  ### Adding the SVG
+  
+Let's append a <code>SVG</code> element to our 
+<br>
+<code>&lt;div class=&quot;barchart&quot;&gt;</code>
+<br>
+container:
+<pre><code contenteditable>var svg = d3.select(".barchart").append("svg")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+</code></pre>
+Remember, the <code>SVG</code> is a container for our chart. Specifically, we append a <code>SVG</code>
+and then append to that a <code>G</code> element which lets us group the building blocks together.
+	
+  </script>
+</section>
+
+</section>
+
+
+
+
+
+
+<!--SLIDE #9 STARTS :: DATA -->
+<section id="sect9">
+
+<!--SLIDE #9.1 STARTS :: DATA -->
+<section id="sect9.1" data-markdown>
+  <script type="text/template">
+
+  ### Reading in our data
+  
+  First, define a function called **type** that ensures **favorability**, a continuous variable, is read in as a
+  number instead of a string.
+<pre><code contenteditable>function type(d) {
+  d.favorability = +d.favorability;
+  return d; 
+  }</code></pre>
+
+Now we can read in our data, passing the name of the data file, the function **type**,
+and asking the browser to log the data to the console.
+<pre><code contenteditable>d3.csv("data.csv", type, function(error, data) {
+  console.log(data);
+</code></pre>
+  </script>
+</section>
+
+
+<!--SLIDE #9.2 STARTS :: DATA -->
+<section id="sect9.2" data-markdown>
+  <script type="text/template">
+
+  ### A recap
+  
+  Your javascript file should now look like:
+<pre><code contenteditable>var margin = {top: 50, right: 20, bottom: 30, left: 60}
+var width = 660 - margin.left - margin.right
+var height = 400 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var svg = d3.select(".barchart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+function type(d) {
+  d.favorability = +d.favorability;
+  return d;
+}
+
+d3.csv("data.csv", type, function(error, data) {
+  console.log(data);</code></pre>
+
+
+  </script>
+</section>
+</section>
+
+
+
+
+<!--SLIDE #10 STARTS :: DATA -->
+<section id="sect10">
+
+<!--SLIDE #10.1 STARTS :: DATA -->
+<section id="sect10.1" data-markdown>
+  <script type="text/template">
+
+  ### Setting the x and y domains
+  
+  Now that we have read in our data, we map our data to the x and y domain. We use the variables *x* and *y*
+  which we defined earlier and we call them using the x and y ranges within our data set.
+<pre><code contenteditable>x.domain(data.map(function(d) { return d.country; }));
+
+y.domain([0, 100]);</code></pre>
+
+This ensures that when we use our *x* or *y* variable on an *x* or *y* data point, it scales
+to the appropriate number for our chart.
+
+I set the *y* domain (favorability) as between 0 and 100 since we know this is a percent out of 100.
+The *x* domain is mapped to the number of unique data points within the *country* variable.
+  </script>
+</section>
+
+
+<!--SLIDE #10.2 STARTS :: DATA -->
+<section id="sect10.2" data-markdown>
+  <script type="text/template">
+
+  ### Next, let's build the bars
+  
+  Add the following code block to **barchart.js**
+<pre><code contenteditable>svg.selectAll(".bar")
+      	.data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.country); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.favorability); })
+      .attr("height", function(d) { return height - y(d.favorability); })
+</code></pre>
+We just selected the <code>SVG</code> variable and bound the data to the SVG while
+appending a new <code>rect</code> for each row in **data.csv**.
+
+We set the *x* and *y* position using the scales we defined earlier and set the width and the height
+using our *x* scale and the the *favorability* variable in the dataset.
+
+
+  </script>
+</section>
+
+
+<!--SLIDE #10.3 STARTS :: DATA -->
+<section id="sect10.3">
+
+We now have something that looks like
+  
+<div class="barchart_step1"></div>
+<br>
+Hmm...
+</section>
+</section>
+
+
+
+
+<!--SLIDE #11 STARTS :: DATA -->
+<section id="sect11">
+
+<!--SLIDE #11.1 STARTS :: DATA -->
+<section id="sect11.1" data-markdown>
+  <script type="text/template">
+
+  ### Coloring our bar chart
+  
+  With a bit of styling back in our HTML document, we can style the color of the bar chart.
+<pre><code contenteditable>body {
+	background-color: black;
+	font: 10px sans-serif;
+	margin-left: 10%;
+}
+
+.bar {
+	fill: #3690c0;
+	}
+
+.bar:hover {
+	fill: #fc4e2a;
+	}</code></pre>
+
+We just set the color of the bar by styling anything where <code>class="bar"</code>. We also added a second color
+for when someone hovers over the bar.
+  </script>
+</section>
+
+
+<!--SLIDE #11.2 STARTS :: DATA -->
+<section id="sect11.2">
+We now have something that looks like
+  
+<div class="barchart_step2"></div>
+<br>
+...better, but we still need our axes!
+
+  </script>
+</section>
+</section>
+
+
+
+<!--SLIDE #12 STARTS :: DATA -->
+<section id="sect11">
+
+<!--SLIDE #12.1 STARTS :: DATA -->
+<section id="sect12.1" data-markdown>
+  <script type="text/template">
+
+  ### Defining our axes
+  
+  Now, we need to define the axes
+<pre><code contenteditable>var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");</code></pre>
+	
+We can call d3.svg.axis() to succinctly create axes. We then scale them using our *x* and *y* variables.
+
+  </script>
+</section>
+
+
+<!--SLIDE #12.2 STARTS :: DATA -->
+<section id="sect12.2" data-markdown>
+ <script type="text/template">
+
+  ### Plot the axes
+  
+Now we can add our *x* and *y* axes to the *SVG* canvas:
+<pre><code contenteditable>svg.append("g")
+	.attr("class", "x axis")
+	.attr("transform", "translate(0," + height + ")")
+	.call(xAxis);
+
+svg.append("g")
+	.attr("class", "y axis")
+	.call(yAxis)
+</code></pre>
+Append a new <code>g</code> element to the variable <code>svg</code> and call the *xAxis* or *yAxis*
+variable to appropriately scale and locate the axes.
+  </script>
+  
+</section>
+
+<!--SLIDE #12.3 STARTS :: DATA -->
+<section id="sect12.3" >
+
+We now have something that looks like
+  
+<div class="barchart_step3"></div>
+<br>
+Now we're cooking!
+
+  
+</section>
+</section>
+
+
+
+<!--SLIDE #13 STARTS :: DATA -->
+<section id="sect13">
+
+<!--SLIDE #13.1 STARTS :: DATA -->
+<section id="sect13.1" data-markdown>
+  <script type="text/template">
+
+  ### Styling the axes
+  
+  Let's add some styling to the axes back in the HTML document.
+<pre><code contenteditable>.axis {
+	font: 12px sans-serif;
+	fill: #fff;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #969696;
+	shape-rendering: crispEdges;
+}
+
+.x.axis path {
+	display: none;
+}</code></pre>
+
+Note that we changed the .x.axis path to <code>display: none</code> which turns off the **x** axis line.
+
+  </script>
+</section>
+
+
+
+<!--SLIDE #13.2 STARTS :: DATA -->
+<section id="sect13.2" data-markdown>
+  <script type="text/template">
+
+  ### Updating the tick marks
+  
+  Let's add to our D3 code to improve the tick marks and labels.
+<pre><code contenteditable>var xAxis = d3.svg.axis()
+	.scale(x)
+    .orient("bottom")
+    .tickSize(0)
+    .tickPadding(5);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(4)
+    .tickSize(3);</code></pre>
+
+We remove the ticks completely from the *x* axis and add padding between the bars and the country labels.
+Also, we limit the number of labels (between the min/max) on the *y* axis to 4 and we shrink the ticks.
+  </script>
+</section>
+
+<!--SLIDE #13.3 STARTS :: DATA -->
+<section id="sect13.3">
+We now have something that looks like
+  
+<div class="barchart_step4"></div>
+<br>
+Not too shabby!
+
+  </script>
+</section>
+
+<section id="sect13.3" data-markdown>
+  <script type="text/template">
+
+  ### Let's recap
+  
+  Our javascript file **barchart.js** should look like
+<pre><code contenteditable>var margin = {top: 50, right: 20, bottom: 30, left: 60};
+var width = 660 - margin.left - margin.right;
+var height = 400 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(0)
+    .tickPadding(5);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(4)
+    .tickSize(3);
+	
+var svg = d3.select(".barchart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+function type(d) {
+  d.favorability = +d.favorability;
+  return d;
+}
+
+d3.csv("data.csv", type, function(error, data) {
+  console.log(data);
+  
+  x.domain(data.map(function(d) { return d.country; }));
+  y.domain([0, 100]);
+ 
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.country); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.favorability); })
+      .attr("height", function(d) { return height - y(d.favorability); })
+});</code></pre>
+
+  </script>
+</section>
+
+<section id="sect13.4" >
+
+  <h3>Let's recap</h3>
+  
+  Our HTML file should look like
+<pre><code contenteditable>&lt;!DOCTYPE html&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;style&gt;
+body {
+	background-color: black;
+	font: 10px sans-serif;
+	margin-left: 10%;
+}
+
+.bar {
+    fill: #3690c0;
+}
+
+.bar:hover {
+    fill: #fc4e2a;
+}
+    
+.axis {
+    font: 12px sans-serif;
+    fill: #fff;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #969696;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+&lt;/style&gt;
+    &lt;body&gt;
+        &lt;div&gt;Behold, a bar chart!&lt;/div&gt;
+        &lt;div class=&quot;barchart_step1&quot;&gt;&lt;/div&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;http://d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
+         &lt;script type=&quot;text/javascript&quot; src=&quot;js/barchart_step1.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+
+</section>
+
+
+
+
+
+
+
+<!--SLIDE #14 STARTS :: DATA -->
+<section id="sect14">
+
+<!--SLIDE #14.1 STARTS :: DATA -->
+<section id="sect14.1" data-markdown>
+  <script type="text/template">
+
+  ### Adding a tooltip
+  
+  Let's add a tooltip when we hover over the bar. This will reveal the favorability data point underlying
+  the bar.
+  
+  First, let's define a variable called <code>tooltip</code>
+<pre><code contenteditable>var tooltip = svg.append("text")
+	.style("position", "absolute")
+	.style("z-index", "1000")
+	.style("visibility", "hidden")
+	.style("fill", "#ffffff");</code></pre>
+
+Let's have our <code>tooltip</code> begin as *hidden*.
+
+  </script>
+</section>
+
+
+
+<!--SLIDE #14.2 STARTS :: DATA -->
+<section id="sect14.2" data-markdown>
+  <script type="text/template">
+
+  ### Now we add mouse events
+  
+  Let's look back at the code that executes the bars themselves.
+<pre><code contenteditable>svg.selectAll(".bar")
+	.data(data)
+	.enter().append("rect")</code></pre>
+Right after 
+<pre><code contenteditable>.attr("height", function(d) { return height - y(d.favorability); })</code></pre>
+ we will add a mouseover event:
+ <pre><code contenteditable>.on("mouseover", function(d){ 
+ 	tooltip.html(d.favorability )
+ 	.style("visibility", "visible")
+ 	.attr("x", function() { return x(d.country) + x.rangeBand()/2 - 10; })
+ 	.attr("y", function() { return y(d.favorability) + 25; })
+ 	;})</code></pre>
+  </script>
+</section>
+
+
+<!--SLIDE #14.3 STARTS :: DATA -->
+<section id="sect14.3" data-markdown>
+  <script type="text/template">
+
+  ### Now we add mouse events
+  
+  Let's also add a mouseout event right after that:
+ <pre><code contenteditable>.on("mouseout", function(d){ 
+ 	tooltip.style("visibility", "hidden")
+ 	;});</code></pre>
+  </script>
+</section>
+
+
+<!--SLIDE #14.4 STARTS :: DATA -->
+<section id="sect14.4">
+We now have something that looks like
+  
+<div class="barchart_step5"></div>
+<br>
+Cool!
+
+</section>
+
+</section>
+
+
+
+
+
+<!--SLIDE #15 STARTS :: DATA -->
+<section id="sect15">
+
+<!--SLIDE #15.1 STARTS :: DATA -->
+<section id="sect15.1" data-markdown>
+  <script type="text/template">
+
+  ### Finishing up: the mouseover detail
+  
+  Now let's add the variable for the notes on mousover:
+
+<pre><code contenteditable>var notes = d3.select(".barchart").append("div")
+	.attr("class", "notes")
+	.html("Hover over a country to see the percent of its population with"
+      		+ "<span style='color:white'> favorable views of Shangri La</span>")
+    .style("margin-bottom", "-50px")
+	.style("margin-top", "20px")
+	.style("margin-left", "10%")
+	.style("font-size", "16px")
+	.style("color", "#fc4e2a")
+	.style("width", "400px")
+	.style("line-height", "1em")
+	.style("text-align", "left");</code></pre>
+
+Note that when we define this variable we can define the <code>html</code> to show on load
+*(Hover over a country to see...)*
+
+  </script>
+</section>
+
+<!--SLIDE #15.2 STARTS :: DATA -->
+<section id="sect15.2" data-markdown>
+  <script type="text/template">
+
+  ### Update our mouseover
+  
+  Find the <code>mouseover</code>. Right after
+<pre><code contenteditable>.attr("y", function() { return y(d.favorability) + 25; })</code></pre>
+we need to add
+<pre><code contenteditable>d3.select(".notes")
+      		.html(d.country + ": <span style='color:white'>" + 
+      		d.favorability + "% favorability. </span><br>" + d.description )</code></pre>
+
+This indicates that we need to grab the <code>div</code> with <code>class="notes"</code>
+on mouseover and change the text to the variables of our choice.
+  </script>
+</section>
+
+
+
+<!--SLIDE #15.3 STARTS :: DATA -->
+<section id="sect15.3">
+We now have something that looks like
+  
+<div class="barchart_step6"></div>
+<br>
+Bingo!
+
+</section>
+
+
+
+<!--SLIDE #15.4 STARTS :: DATA -->
+<section id="sect15.4" data-markdown>
+  <script type="text/template">
+
+  ### Let's recap
+  
+  Our javascript file **barchart.js** should look like
+<pre><code contenteditable>var margin = {top: 50, right: 20, bottom: 30, left: 60};
+var width = 660 - margin.left - margin.right;
+var height = 400 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickSize(0)
+    .tickPadding(5);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(4)
+    .tickSize(3);
+
+var notes = d3.select(".barchart").append("div")
+	.attr("class", "notes")
+	.html("Hover over a country to see the percent of its population with"
+      		+ "<span style='color:white'> favorable views of Shangri La</span>")
+    .style("margin-bottom", "-50px")
+	.style("margin-top", "20px")
+	.style("margin-left", "10%")
+	.style("font-size", "16px")
+	.style("color", "#fc4e2a")
+	.style("width", "400px")
+	.style("line-height", "1em")
+	.style("text-align", "left");
+	
+var svg = d3.select(".barchart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	function type(d) {
+  d.favorability = +d.favorability;
+  return d;
+}
+
+d3.csv("data.csv", type, function(error, data) {
+  console.log(data);
+  
+  x.domain(data.map(function(d) { return d.country; }));
+  y.domain([0, 100]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -45)
+      .attr("dy", ".21em")
+      .style("text-anchor", "end")
+      .text("Percent with favorable view");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.country); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.favorability); })
+      .attr("height", function(d) { return height - y(d.favorability); })
+	  .on("mouseover", function(d){ 
+	  		tooltip.html(d.favorability )
+	  		.style("visibility", "visible")
+	  		.attr("x", function() { return x(d.country) + x.rangeBand()/2 - 10; })
+      		.attr("y", function() { return y(d.favorability) + 25; })
+      		
+      		d3.select(".notes")
+      		.html(d.country + ": <span style='color:white'>" + 
+      		d.favorability + "% favorability. </span><br>" + d.description )
+	  		;})
+		
+	  .on("mouseout", function(d){ 
+	  		tooltip.style("visibility", "hidden")
+	  		;});
+	
+var tooltip = svg.append("text")
+	.style("position", "absolute")
+	.style("z-index", "1000")
+	.style("visibility", "hidden")
+	.style("fill", "#ffffff");
+});</code></pre>
+
+  </script>
+</section>
+
+
+
+<!--SLIDE #15.5 STARTS :: DATA -->
+<section id="sect15.4" >
+
+  <h3>Let's recap</h3>
+  
+  Our HTML file should look like
+<pre><code contenteditable>&lt;!DOCTYPE html&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;style&gt;
+body {
+	background-color: black;
+	font: 10px sans-serif;
+	margin-left: 10%;
+}
+
+.bar {
+    fill: #3690c0;
+}
+
+.bar:hover {
+    fill: #fc4e2a;
+}
+    
+.axis {
+    font: 12px sans-serif;
+    fill: #fff;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #969696;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+&lt;/style&gt;
+    &lt;body&gt;
+        &lt;div&gt;Behold, a bar chart!&lt;/div&gt;
+        &lt;div class=&quot;barchart_step1&quot;&gt;&lt;/div&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;http://d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
+         &lt;script type=&quot;text/javascript&quot; src=&quot;js/barchart_step1.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+</section>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+	</div>
+		</div>
+
+
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				]
+			});
+		</script>
+
+		<script src="js/d3.min.js"></script>
+		<script src="d3/d3.tip.min.js"></script>
+		
+		<script type="text/javascript" src="js/barchart_v2.js"></script>
+		<script type="text/javascript" src="js/barchart_step1.js"></script>
+		<script type="text/javascript" src="js/barchart_step2.js"></script>
+		<script type="text/javascript" src="js/barchart_step3.js"></script>
+		<script type="text/javascript" src="js/barchart_step4.js"></script>
+		<script type="text/javascript" src="js/barchart_step5.js"></script>
+		<script type="text/javascript" src="js/barchart_step6.js"></script>
+	
+</body>
+</html>
